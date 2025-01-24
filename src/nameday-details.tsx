@@ -17,8 +17,11 @@ export default function DetailsView({ name }: { name: string }) {
   );
   const docs = data?.response.docs;
   const firstgiven = docs?.filter((item) => item.type === "firstgiven");
-  const maleCount = firstgiven?.filter((item) => item.gender === "M")[0].count;
-  const femaleCount = firstgiven?.filter((item) => item.gender === "F")[0].count;
+  const males = firstgiven?.filter((item) => item.gender === "M")[0];
+  const females = firstgiven?.filter((item) => item.gender === "F")[0];
+  const maleCount = males?.count ?? 0;
+  const femaleCount = females?.count ?? 0;
+  const graphfile = maleCount > femaleCount ? males?.graphfile : females?.graphfile;
   const totalCount = (femaleCount ?? 0) + (maleCount ?? 0);
   const family = docs?.filter((item) => item.type === "family")[0];
   const isMale = maleCount ?? 0 > 0;
@@ -34,7 +37,7 @@ export default function DetailsView({ name }: { name: string }) {
     }
   }, [error]);
 
-  const graphMarkdown = firstgiven ? `![](https://www.ssb.no/${firstgiven.graphfile})` : "";
+  const graphMarkdown = firstgiven ? `![](https://www.ssb.no/${graphfile})` : "";
 
   return (
     <Detail
