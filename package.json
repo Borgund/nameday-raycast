@@ -3,7 +3,7 @@
   "name": "nameday",
   "title": "Nameday",
   "description": "The most reliable way to know whos nameday it is today!",
-  "icon": "extension-icon.png",
+  "icon": "logo.png",
   "author": "Borgund",
   "owner": "scaleaq",
   "categories": [
@@ -13,8 +13,8 @@
   "commands": [
     {
       "name": "nameday",
-      "title": "nameday",
-      "subtitle": "Check whos nameday it is",
+      "title": "Nameday",
+      "subtitle": "All the nameday insight you will ever need",
       "description": "Checks todays namedays so you never have to wonder for long!",
       "mode": "view"
     }
