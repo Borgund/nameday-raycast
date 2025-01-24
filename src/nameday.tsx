@@ -1,6 +1,7 @@
 import { showToast, Toast, List } from "@raycast/api";
 import { useFetch } from "@raycast/utils";
 import { useEffect } from "react";
+import { NameListItem } from "./components/nameListItem";
 
 type NameDayData = { name: string; day: number; month: number };
 
@@ -14,8 +15,6 @@ export default function Command() {
 
   const todayData = data?.filter(({ day }) => day === new Date().getDate());
   const restData = data?.filter(({ day }) => day !== new Date().getDate());
-
-  //Fetch further details from: "https://www.ssb.no/befolkning/navn/statistikk/navn/_/service/mimir/nameSearch?name=hans&includeGraphData=true",
 
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const months = [
@@ -67,20 +66,18 @@ export default function Command() {
   return (
     <List isLoading={isLoading} navigationTitle="Namedays" searchBarPlaceholder="Search for a name...">
       <List.Section title={`📆 Today's Namedays - ${days[new Date().getDay()]}`}>
-        {todayData?.map(({ name }) => <List.Item key={name} title={name} accessories={[{ text: `Today! 🎉` }]} />)}
+        {todayData?.map(({ name }) => <NameListItem key={name} name={name} accessoriesText="Today! 🎉" />)}
       </List.Section>
       <List.Section title="⏳ Close upcoming Namedays">
         {restData?.map(({ name, day, month }) => {
           const date = new Date(new Date().getFullYear(), month - 1, day);
-          return (
-            <List.Item key={name} title={name} accessories={[{ text: `${days[date.getDay()]} ${day}.${month}  📅` }]} />
-          );
+          return <NameListItem key={name} name={name} accessoriesText={`${days[date.getDay()]} ${day}.${month}  📅`} />;
         })}
       </List.Section>
       {!allIsLoading && allData && (
         <List.Section title="🔍 All Namedays">
           {reorderedNamedays?.map?.(({ name, day, month }) => {
-            return <List.Item key={name} title={name} accessories={[{ text: `${day}. ${months[month - 1]} 🗓️` }]} />;
+            return <NameListItem key={name} name={name} accessoriesText={`${day}. ${months[month - 1]} 🗓️`} />;
           })}
         </List.Section>
       )}
