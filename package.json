@@ -18,6 +18,14 @@
       "subtitle": "All the nameday insight you will ever need",
       "description": "Checks todays namedays so you never have to wonder for long!",
       "mode": "view"
+    },
+    {
+      "name": "nameday-menu",
+      "title": "Nameday",
+      "subtitle": "Menubar",
+      "description": "See todays namedays at a glance",
+      "mode": "menu-bar",
+      "interval": "12h"
     }
   ],
   "dependencies": {

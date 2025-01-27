@@ -2,8 +2,7 @@ import { showToast, Toast, List } from "@raycast/api";
 import { useFetch } from "@raycast/utils";
 import { useEffect } from "react";
 import { NameListItem } from "./components/nameListItem";
-
-type NameDayData = { name: string; day: number; month: number };
+import { NameDayData } from "./types";
 
 export default function Command() {
   const { isLoading, data, error } = useFetch<NameDayData[]>("https://nameday.borgund.dev/week");
